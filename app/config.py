@@ -4,11 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     bot_token: str
     admin_ids: str = ""
-
-    database_url: str = (
-        "postgresql+asyncpg://lotex:change_me@localhost:5432/lotex"
-    )
-
+    database_url: str = "sqlite+aiosqlite:///lotex.db"
     bot_public_name: str = "LOTEX SHOP"
 
     model_config = SettingsConfigDict(
@@ -17,7 +13,7 @@ class Settings(BaseSettings):
     )
 
     @property
-    def admins(self) -> set[int]:
+    def admins(self):
         return {
             int(x.strip())
             for x in self.admin_ids.split(",")
