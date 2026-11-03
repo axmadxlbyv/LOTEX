@@ -1,30 +1,17 @@
 
-name: LOTEX SHOP 24/7 KEEP ALIVE
+name: LOTEX SHOP AUTO RUN
 
 on:
   schedule:
     - cron: "*/5 * * * *"
-
   workflow_dispatch:
-
-permissions:
-  contents: read
 
 jobs:
   keep-alive:
     runs-on: ubuntu-latest
 
     steps:
-      - name: LOTEX SHOP serverini tekshirish
-        env:
-          RENDER_URL: ${{ secrets.RENDER_URL }}
+      - name: LOTEX SHOP status
         run: |
-          if [ -z "$RENDER_URL" ]; then
-            echo "RENDER_URL Secret topilmadi"
-            exit 1
-          fi
-
-          curl -L --max-time 30 \
-            --retry 2 \
-            --retry-delay 5 \
-            "$RENDER_URL"
+          echo "LOTEX SHOP workflow ishga tushdi"
+          date
