@@ -1,0 +1,1 @@
+# LOTEX SHOP application package
