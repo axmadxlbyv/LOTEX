@@ -1,1 +1,1 @@
-# LOTEX SHOP application package
+# Database package
