@@ -1,17 +1,27 @@
 
-name: LOTEX SHOP AUTO RUN
+name: LOTEX SHOP BOT
 
 on:
-  schedule:
-    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:
-  keep-alive:
+  run-bot:
     runs-on: ubuntu-latest
 
     steps:
-      - name: LOTEX SHOP status
-        run: |
-          echo "LOTEX SHOP workflow ishga tushdi"
-          date
+      - name: Kodlarni yuklash
+        uses: actions/checkout@v4
+
+      - name: Python o'rnatish
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Kutubxonalarni o'rnatish
+        run: pip install -r requirements.txt
+
+      - name: Botni ishga tushirish
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          ADMIN_IDS: ${{ secrets.ADMIN_IDS }}
+        run: python -m app
